@@ -39,7 +39,6 @@ The project started as a CLI application and has been refactored to use **Servic
 - Git & GitHub for version control
 
 ---
-```md
 ## Project Structure
 ```Models/ Task model
 Services/ TaskManager (business logic)
