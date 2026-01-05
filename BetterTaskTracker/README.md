@@ -41,8 +41,7 @@ The project started as a CLI application and has been refactored to use **Servic
 ---
 ```md
 ## Project Structure
-```Controllers/ (planned for Web API transition)
-Models/ Task model
+```Models/ Task model
 Services/ TaskManager (business logic)
 Repositories/ TaskRepository (JSON persistence)
 Program.cs Application entry point
