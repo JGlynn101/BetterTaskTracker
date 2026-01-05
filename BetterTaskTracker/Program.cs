@@ -13,12 +13,12 @@ namespace TaskTracker
             TaskRepository taskRepository = new TaskRepository{};
             int taskId;
             int userResponse;
-            bool listUpdated;
+            bool listUpdated = false;
             TaskManager taskManager = new TaskManager(taskRepository);
             bool flag = true;
             while (flag)
             {
-                Console.WriteLine("Insert 1 to Add Task\n2 to View Tasks\n3 to update a Task\n4 to Delete Tasks\n5 to exit program");
+                Console.WriteLine("1 to Add Task\n2 to View Tasks\n3 to update a Task\n4 to Delete Tasks\n5 to exit program");
                 int.TryParse(Console.ReadLine(), out userResponse);
                 if (userResponse == 1) // Add task
                 {
@@ -52,12 +52,41 @@ namespace TaskTracker
                 }
                 else if (userResponse == 3) //Update Task
                 {
+                    int taskChangeInteger = 0;
+                    string taskChangeString = "";
                     Console.WriteLine("Insert ID of Task to Update");
                     int.TryParse(Console.ReadLine(), out taskId);
-                    Console.WriteLine("Insert new Description");
-                    string descriptionString = Console.ReadLine();
-                    taskManager.Update(taskId, descriptionString);
-                    listUpdated = true;
+                    Console.WriteLine("1 to Change Name 2 to Change Status 3 to Change Description");
+                    int.TryParse(Console.ReadLine(), out userResponse);
+                    if(userResponse == 1)
+                    {
+                        taskChangeInteger = 1;
+                        Console.WriteLine("Insert new Name");
+                        taskChangeString = Console.ReadLine();
+                        
+                    }
+                    if(userResponse == 2)
+                    {
+                        taskChangeInteger = 2;
+                        Console.WriteLine("Insert 'ToDo' or 'In Progress'");
+                        taskChangeString = Console.ReadLine();
+                        if(taskChangeString != "ToDo" || taskChangeString != "In Progress")
+                        {
+                            while (taskChangeString != "ToDo" || taskChangeString != "In Progress")
+                            {
+                                Console.WriteLine("Incorrect Format. Please Try again.");
+                                Console.WriteLine("Insert 'ToDo' or 'In Progress'");
+                                taskChangeString = Console.ReadLine();
+                            }
+                        }
+                    }
+                    if(userResponse == 3)
+                    {
+                        taskChangeInteger = 3;
+                        Console.WriteLine("Insert new Description");
+                        taskChangeString = Console.ReadLine();
+                    }
+                    taskManager.Update(taskId, taskChangeInteger, taskChangeString);
                 }
                 else if (userResponse == 4) //Delete Task
                 {
@@ -71,7 +100,11 @@ namespace TaskTracker
                     flag = false;
                 }
             }
-            taskManager.SaveTasks();
+            if (listUpdated)
+            {
+                taskManager.SaveTasks();
+            }
+       
             return;
         }
     }

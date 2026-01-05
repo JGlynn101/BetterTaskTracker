@@ -34,52 +34,63 @@ namespace TaskTracker
                 _repo.Save(Tasks);
             }
         }
-        public void Update(int id, string description)
+        public void Update(int id, int fieldInteger, string userTaskChange)
         {
             if(id >= 1){
                 var task = Tasks.FirstOrDefault(t => t.Id == id);
-                task.Description = description;
+                if(userTaskChange != ""){
+                    if(fieldInteger == 1)
+                    {
+                        task.Name = userTaskChange;
+                    }
+                    if(fieldInteger == 2)
+                    {
+                        task.Status = userTaskChange;
+                    }
+                    if(fieldInteger == 3)
+                    {
+                        task.Description = userTaskChange;
+                    }
+                }
             }
         }
         public void List()
         {
-            Console.WriteLine("Id\tName\nDescription\tStatus");
+            Console.WriteLine("Tasks\nId\tName\tDescription\tStatus");
             Console.WriteLine("-------------------------------");
             foreach(Task task in Tasks){
                 if(!task.Deleted){
-                    Console.WriteLine($"{task.Id}\n{task.Name}\t{task.Description}\t{task.Status}");
+                    Console.WriteLine($"{task.Id}\t{task.Name}\t{task.Description}\t{task.Status}");
                 }
             }
         }
         public void ListFinishedTasks()
         {
-            Console.WriteLine("Completed Tasks:");
-            Console.WriteLine("Id\tName\nDescription\tStatus");
+            Console.WriteLine("Completed Tasks\nId\tName\tDescription\tStatus");
             Console.WriteLine("-------------------------------");
             foreach (Task task in Tasks)
             {
                 if(task.Finished && !task.Deleted)
                 {
-                    Console.WriteLine($"{task.Id}\n{task.Name}\t{task.Description}\t{task.Status}");  
+                    Console.WriteLine($"{task.Id}\t{task.Name}\t{task.Description}\t{task.Status}");  
                 }
             }
         }
         public void ListUnfinishedTasks()
         {
-            Console.WriteLine("Completed Tasks:");
-            Console.WriteLine("Id\tName\nDescription\tStatus");
+            Console.WriteLine("Unfinished Tasks\nId\tName\tDescription\tStatus");
             Console.WriteLine("-------------------------------");
             foreach (Task task in Tasks)
             {
                 if(!task.Finished && !task.Deleted)
                 {
-                    Console.WriteLine($"{task.Id}\n{task.Name}\t{task.Description}\t{task.Status}");  
+                    Console.WriteLine($"{task.Id}\t{task.Name}\t{task.Description}\t{task.Status}");  
                 }
             }
         }
         public void ListInProgressTasks()
         {
-            Console.WriteLine("In Progress Tasks\nId\tName\nDescription\tStatus");
+            Console.WriteLine("In Progress Tasks\nId\tName\tDescription\tStatus");
             Console.WriteLine("-------------------------------");
             foreach (Task task in Tasks)
             {
