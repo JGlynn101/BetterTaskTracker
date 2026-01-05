@@ -40,12 +40,11 @@ The project started as a CLI application and has been refactored to use **Servic
 
 ---
 ## Project Structure
-```Models/ Task model
+Models/ Task model
 Services/ TaskManager (business logic)
 Repositories/ TaskRepository (JSON persistence)
 Program.cs Application entry point
 tasks.json Runtime-generated task storage
-```
 ## How to run
 
 ### Prerequisites
