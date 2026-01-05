@@ -47,7 +47,7 @@ Services/ TaskManager (business logic)
 Repositories/ TaskRepository (JSON persistence)
 Program.cs Application entry point
 tasks.json Runtime-generated task storage
-
+```
 ## How to run
 
 ### Prerequisites
